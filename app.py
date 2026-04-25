@@ -2,7 +2,7 @@ import os
 import sqlite3
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
-import google.generativeai as genai
+from google import genai
 from dotenv import load_dotenv
 
 load_dotenv()
