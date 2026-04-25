@@ -10,14 +10,21 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = "aadhaar_guardian_llm_secret_key"
 
-DB_NAME = "aadhaar_guardian_llm.db"
 
+if os.name == "nt":  # Windows (local)
+    DB_NAME = "aadhaar_guardian_llm.db"
+else:  # Vercel/Linux
+    DB_NAME = "/tmp/aadhaar_guardian_llm.db"
 
 def get_connection():
+    db_dir = os.path.dirname(DB_NAME)
+
+    if db_dir and not os.path.exists(db_dir):
+        os.makedirs(db_dir)
+
     conn = sqlite3.connect(DB_NAME)
     conn.row_factory = sqlite3.Row
     return conn
-
 
 def init_db():
     conn = get_connection()
@@ -446,28 +453,33 @@ def chat_history():
 
 
 @app.route("/api/chat/send", methods=["POST"])
+@app.route("/api/chat/send", methods=["POST"])
 def chat_send():
-    data = request.get_json()
-    user_message = data.get("message", "").strip()
+    try:
+        data = request.get_json()
+        user_message = data.get("message", "").strip()
 
-    if not user_message:
-        return jsonify({"success": False, "message": "Message cannot be empty."}), 400
+        if not user_message:
+            return jsonify({"success": False, "message": "Message cannot be empty."}), 400
 
-    bot_message = get_llm_reply(user_message)
+        bot_message = get_llm_reply(user_message)
 
-    conn = get_connection()
-    conn.execute("""
-        INSERT INTO chat_messages (sender, message, created_at)
-        VALUES (?, ?, ?)
-    """, ("user", user_message, datetime.now().isoformat()))
-    conn.execute("""
-        INSERT INTO chat_messages (sender, message, created_at)
-        VALUES (?, ?, ?)
-    """, ("bot", bot_message, datetime.now().isoformat()))
-    conn.commit()
-    conn.close()
+        conn = get_connection()
+        conn.execute("""
+            INSERT INTO chat_messages (sender, message, created_at)
+            VALUES (?, ?, ?)
+        """, ("user", user_message, datetime.now().isoformat()))
+        conn.execute("""
+            INSERT INTO chat_messages (sender, message, created_at)
+            VALUES (?, ?, ?)
+        """, ("bot", bot_message, datetime.now().isoformat()))
+        conn.commit()
+        conn.close()
 
-    return jsonify({"success": True, "reply": bot_message})
+        return jsonify({"success": True, "reply": bot_message})
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
 
 
 @app.route("/api/dashboard", methods=["GET"])
