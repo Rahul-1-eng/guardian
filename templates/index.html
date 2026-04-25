@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aadhaar Guardian | Identity Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-glow-1"></div>
+        <div class="hero-glow-2"></div>
+        <nav class="navbar fade-in">
+            <div class="brand">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #818cf8;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                Guardian
+            </div>
+            <ul class="nav-links">
+                <li><a href="#validator">Validator</a></li>
+                <li><a href="#explainer">Learn</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+                <li><a href="#report">Report</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                
+                <li class="nav-utils">
+                    <!-- Google Translate Widget Container -->
+                    <div id="google_translate_element"></div>
+                    
+                    <!-- Theme Toggle Button -->
+                    <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    </button>
+
+                    <a href="/admin-login" class="btn-nav">Admin</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="hero-grid">
+            <div class="hero-text fade-in delay-1">
+                <span class="badge glass-badge">Open Source Civic Tech</span>
+                <h1>Secure Your <br><span class="text-gradient">Digital Identity.</span></h1>
+                <p>
+                    An integrated platform for Aadhaar safety awareness, DBT education, 
+                    verhoeff validations, and intelligent incident reporting powered by AI.
+                </p>
+                <div class="hero-actions">
+                    <a href="#validator" class="btn-primary btn-lg shadow-glow">Verify Integrity</a>
+                    <a href="#resources" class="btn-secondary btn-lg">Browse Knowledge Base</a>
+                </div>
+            </div>
+
+            <div class="hero-card-stack fade-in delay-2">
+                <div class="hero-card glass animated-float">
+                    <div class="card-icon gradient-text">✨</div>
+                    <h3>AI-Powered Assistance</h3>
+                    <p>Interact with our Gemini-powered LLM chatbot for real-time guidance on avoiding OTP scams and phishing.</p>
+                </div>
+                <div class="hero-card glass animated-float delay-float">
+                    <div class="card-icon gradient-text">🛡️</div>
+                    <h3>Structured Case Flow</h3>
+                    <p>Report suspicious behavior directly to an administrative dashboard for review and statistical tracking.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" id="validator">
+        <div class="section-header fade-in">
+            <h2>Integrity Validator</h2>
+            <p>Utilizing Verhoeff algorithms and pattern recognition to calculate risk scores.</p>
+        </div>
+        <div class="card narrow floating-card fade-in delay-1">
+            <form id="validatorForm">
+                <div class="input-group">
+                    <label>Aadhaar Identity Number</label>
+                    <input id="aadhaarInput" type="text" maxlength="12" placeholder="e.g., 1234 5678 9012" autocomplete="off" class="text-lg text-center tracking-widest">
+                </div>
+                <button type="submit" class="btn-primary full mt-4 shadow-glow">Run Diagnostic</button>
+            </form>
+            <div id="validatorResult" class="result hidden"></div>
+        </div>
+    </section>
+
+    <section class="section alt" id="explainer">
+        <div class="section-header fade-in">
+            <h2>Identity Workflows Explained</h2>
+            <p>Deconstructing standard infrastructure protocols into accessible concepts.</p>
+        </div>
+
+        <div class="grid two fade-in delay-1">
+            <div class="card hover-up outline-card">
+                <div class="icon-wrapper bg-indigo-50">🔗</div>
+                <h3>Database Seeding</h3>
+                <p class="muted">The process of associating an identity token with a service beneficiary database (e.g., LPG, scholarship, welfare records).</p>
+            </div>
+            <div class="card hover-up outline-card">
+                <div class="icon-wrapper bg-emerald-50">🏦</div>
+                <h3>DBT Transfer Linkage</h3>
+                <p class="muted">The bank-side configuration required to map the identity token to a specific account for receiving Direct Benefit Transfers.</p>
+            </div>
+        </div>
+
+        <div class="card floating-card mt-6 fade-in delay-2 premium-border">
+            <div class="flex-between mb-4">
+                <h3>Visual Breakdown</h3>
+                <span class="badge premium-badge">Video Guide</span>
+            </div>
+            <div class="video-container">
+                <iframe class="project-video" src="https://www.youtube.com/embed/ZPvBNUbcwOI?start=155" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="resources">
+        <div class="section-header fade-in">
+            <h2>Knowledge Base</h2>
+            <p>Curated official guidelines synced from the admin database.</p>
+        </div>
+        <div id="resourceGrid" class="grid three fade-in delay-1"></div>
+    </section>
+
+    <section class="section alt" id="quiz">
+        <div class="section-header fade-in">
+            <h2>Security Aptitude Test</h2>
+            <p>Evaluate your resilience against common social engineering vectors.</p>
+        </div>
+        <div class="card narrow floating-card outline-card fade-in delay-1">
+            <div class="input-group mb-6">
+                <label>Operator Identifier</label>
+                <input type="text" id="quizUserName" placeholder="e.g., Rahul Kumar">
+            </div>
+            <div id="quizContainer" class="quiz-wrapper"></div>
+            <button id="submitQuizBtn" class="btn-primary full mt-6 shadow-glow">Compile Results</button>
+            <div id="quizResult" class="result hidden"></div>
+        </div>
+    </section>
+
+    <section class="section" id="report">
+        <div class="section-header fade-in">
+            <h2>Incident Reporting Protocol</h2>
+            <p>Log potential misuse, phishing links, or identity theft attempts.</p>
+        </div>
+        <div class="card floating-card premium-border fade-in delay-1">
+            <form id="reportForm">
+                <div class="grid two">
+                    <div class="input-group">
+                        <label>Target Name</label>
+                        <input type="text" id="fullName" placeholder="e.g., Rahul Kumar">
+                    </div>
+                    <div class="input-group">
+                        <label>Contact Method</label>
+                        <input type="text" id="contact" placeholder="e.g., +91 9876543210">
+                    </div>
+                </div>
+                <div class="grid two mt-4">
+                    <div class="input-group">
+                        <label>Vector Type</label>
+                        <div class="select-wrapper">
+                            <select id="incidentType">
+                                <option value="">Select category...</option>
+                                <option value="OTP Scam">OTP Interception</option>
+                                <option value="Phishing Call">Vishing (Voice Phishing)</option>
+                                <option value="Fake KYC Link">Malicious URL / Fake KYC</option>
+                                <option value="Document Misuse">Document Leak</option>
+                                <option value="Identity Theft Attempt">Identity Theft</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Location</label>
+                        <input type="text" id="city" placeholder="e.g., Mumbai, Maharashtra">
+                    </div>
+                </div>
+                <div class="input-group mt-4">
+                    <label>Incident Details</label>
+                    <textarea id="description" rows="5" placeholder="Provide technical and situational specifics..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary full mt-6 shadow-glow">Dispatch Report</button>
+            </form>
+            <div id="reportResult" class="result hidden"></div>
+        </div>
+    </section>
+
+    <section class="section alt" id="dashboard">
+        <div class="section-header fade-in">
+            <h2>Global Telemetry</h2>
+            <p>Live visualization of systemic incident variables and validation throughput.</p>
+        </div>
+
+        <div class="stats-grid fade-in delay-1">
+            <div class="stat-card">
+                <div class="stat-icon bg-indigo-100 text-indigo-600">📊</div>
+                <div><span>Total Reports</span><h3 id="totalReports">0</h3></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon bg-emerald-100 text-emerald-600">🔍</div>
+                <div><span>Validations Run</span><h3 id="totalValidations">0</h3></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon bg-red-100 text-red-600">⚠️</div>
+                <div><span>Checksum Fails</span><h3 id="invalidValidations">0</h3></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon bg-blue-100 text-blue-600">🎯</div>
+                <div><span>Aptitude Avg</span><h3 id="avgQuizScore">0%</h3></div>
+            </div>
+        </div>
+
+        <div class="grid two fade-in delay-2">
+            <div class="card floating-card"><h3>Vector Breakdown</h3><div class="chart-container"><canvas id="incidentChart"></canvas></div></div>
+            <div class="card floating-card"><h3>Validation Risk Spread</h3><div class="chart-container"><canvas id="riskChart"></canvas></div></div>
+        </div>
+
+        <div class="grid two mt-6 fade-in delay-3">
+            <div class="card floating-card"><h3>Severity Index</h3><div class="chart-container"><canvas id="severityChart"></canvas></div></div>
+            <div class="card floating-card outline-card">
+                <div class="flex-between mb-4">
+                    <h3>Latest Operations</h3>
+                    <div class="pulse-indicator"></div>
+                </div>
+                <div id="recentReports" class="feed-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="chatbox-shell fade-in delay-3">
+        <button id="chatToggleBtn" class="chat-toggle shadow-glow">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            Guardian AI
+        </button>
+
+        <div id="chatPanel" class="chat-panel hidden-chat">
+            <div class="chat-header">
+                <div>
+                    <h3>Guardian Assistant</h3>
+                    <p class="flex items-center gap-1"><span class="status-dot"></span> Powered by Gemini AI</p>
+                </div>
+                <button id="chatCloseBtn" class="chat-close">×</button>
+            </div>
+
+            <div id="chatMessages" class="chat-messages"></div>
+
+            <div class="chat-input-row">
+                <button id="chatMicBtn" class="btn-mic" aria-label="Use Microphone">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                </button>
+                <input type="text" id="chatInput" placeholder="Query the AI..." autocomplete="off">
+                <button id="chatSendBtn" class="btn-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content fade-in">
+            <div class="brand text-slate-800">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-600"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                Guardian
+            </div>
+            <p class="text-sm muted">An open-source civic tech initiative for identity security.</p>
+        </div>
+    </footer>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

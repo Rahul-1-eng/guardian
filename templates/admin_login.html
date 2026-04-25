@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardian Console Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="admin-login-body">
+    <div class="hero-glow-1" style="opacity: 0.15;"></div>
+    <div class="login-shell fade-in">
+        <div class="card login-card floating-card premium-border">
+            <div class="text-center mb-8">
+                <div class="admin-icon pulse-soft">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </div>
+                <h2 class="text-2xl font-bold mt-4">Console Access</h2>
+                <p class="muted text-sm mt-2">Authenticate to manage platform telemetry.</p>
+            </div>
+            
+            <div class="input-group">
+                <label>Admin Identifier</label>
+                <input type="text" id="adminUsername" placeholder="root">
+            </div>
+            <div class="input-group mt-5">
+                <label>Access Key</label>
+                <input type="password" id="adminPassword" placeholder="••••••••">
+            </div>
+            
+            <button id="adminLoginBtn" class="btn-primary full mt-8 shadow-glow text-lg">Establish Connection</button>
+            <div id="adminLoginResult" class="result hidden mt-4"></div>
+            
+            <div class="text-center mt-6">
+                <a class="back-link muted text-sm" href="/">← Return to Public Facing Terminal</a>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='admin_login.js') }}"></script>
+</body>
+</html>
