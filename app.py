@@ -211,8 +211,8 @@ def get_llm_reply(user_message: str):
 
     if not api_key:
         return (
-            "Gemini API chat is not configured yet. Set the GEMINI_API_KEY environment variable "
-            "and restart the app to enable the real assistant."
+            "Gemini API chat is not configured yet. "
+            "Set the GEMINI_API_KEY environment variable."
         )
 
     system_prompt = """
@@ -224,48 +224,28 @@ Focus on:
 - phishing and fake KYC links
 - difference between Aadhaar seeding and DBT bank linking
 - safe document sharing
-- how to report suspicious activity using this platform
-
-Do not claim government authority.
-Do not provide legal guarantees.
-If asked something unrelated, gently redirect toward identity safety help.
+- how to report suspicious activity
 """.strip()
 
-    conn = get_connection()
-    rows = conn.execute("""
-        SELECT sender, message
-        FROM chat_messages
-        ORDER BY id DESC
-        LIMIT 10
-    """).fetchall()
-    conn.close()
-
-    rows = list(reversed(rows))
-
-    context = f"System Instructions:\n{system_prompt}\n\nConversation History:\n"
-    for row in rows:
-        role = "Assistant" if row["sender"] == "bot" else "User"
-        context += f"{role}: {row['message']}\n"
-
-    context += f"\nUser: {user_message}\nAssistant:"
-
     try:
+        # Create client
         client = genai.Client(api_key=api_key)
 
+        # Send prompt
         response = client.models.generate_content(
             model="gemini-2.0-flash",
-            contents=context
+            contents=f"{system_prompt}\n\nUser: {user_message}"
         )
 
-        answer = response.text.strip() if response.text else ""
+        # Extract reply safely
+        if hasattr(response, "text") and response.text:
+            return response.text.strip()
 
-        if not answer:
-            answer = "I could not generate a reply right now. Please try again."
-
-        return answer
+        return "I could not generate a reply right now."
 
     except Exception as e:
-        return f"Chat service error: {str(e)}"
+        print("Gemini error:", e)
+        return "Chat service error. Please try again."
 
 
 @app.route("/")
