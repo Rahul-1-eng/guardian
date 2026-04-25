@@ -244,8 +244,7 @@ Focus on:
         return "I could not generate a reply right now."
 
     except Exception as e:
-        print("Gemini error:", e)
-        return "Chat service error. Please try again."
+        return f"Chat service error: {str(e)}"
 
 
 @app.route("/")
