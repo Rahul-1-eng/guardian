@@ -208,13 +208,12 @@ def classify_severity(description: str):
 
 def get_llm_reply(user_message: str):
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
+
     if not api_key:
         return (
             "Gemini API chat is not configured yet. Set the GEMINI_API_KEY environment variable "
             "and restart the app to enable the real assistant."
         )
-
-    genai.configure(api_key=api_key)
 
     system_prompt = """
 You are the Aadhaar Guardian assistant for an educational civic-tech web application.
@@ -242,37 +241,29 @@ If asked something unrelated, gently redirect toward identity safety help.
     conn.close()
 
     rows = list(reversed(rows))
-    
+
     context = f"System Instructions:\n{system_prompt}\n\nConversation History:\n"
     for row in rows:
         role = "Assistant" if row["sender"] == "bot" else "User"
         context += f"{role}: {row['message']}\n"
-    
+
     context += f"\nUser: {user_message}\nAssistant:"
 
     try:
-        available_models = [
-            m.name for m in genai.list_models() 
-            if 'generateContent' in m.supported_generation_methods
-        ]
-        
-        if not available_models:
-            return "Chat service error: No text generation models are available for this API key."
-            
-        selected_model = available_models[0] 
-        preferences = ["models/gemini-1.5-flash", "models/gemini-1.5-pro", "models/gemini-pro"]
-        for pref in preferences:
-            if pref in available_models:
-                selected_model = pref
-                break
+        client = genai.Client(api_key=api_key)
 
-        model = genai.GenerativeModel(model_name=selected_model)
-        response = model.generate_content(context)
-        
-        answer = response.text.strip()
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=context
+        )
+
+        answer = response.text.strip() if response.text else ""
+
         if not answer:
             answer = "I could not generate a reply right now. Please try again."
+
         return answer
+
     except Exception as e:
         return f"Chat service error: {str(e)}"
 
